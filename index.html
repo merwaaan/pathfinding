@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>A comparison of pathfinding algorithms</title>
+
+        <script src="algorithm.js"></script>
+        <script src="breadthfirst.js"></script>
+        <script src="greedy.js"></script>
+        <script src="hpastar.js"></script>
+
+        <script src="lib/d3.min.js"></script>
+
+        <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-size: 90%;
+            font-family: sans-serif;
+        }
+        i {
+            font-family: monospace;
+        }
+        h5 {
+            text-decoration: underline;
+        }
+        div {
+           float: left;
+           padding: 1em;
+        }
+        svg {
+        }
+        #summary {
+            width: 80%;
+            text-align: justify;
+        }
+        rect {
+            stroke: white;
+            fill: lightgrey;
+        }
+        rect.unwalkable {
+            fill: grey;
+        }
+        rect.start {
+            fill: #A8DBA8;
+        }
+        rect.goal {
+            fill: #78BD9A;
+        }
+        rect.visited:not(.start):not(.goal):not(.unwalkable) {
+            fill: lightsteelblue;
+        }
+        rect.frontier:not(.start):not(.goal):not(.unwalkable) {
+            fill: steelblue;
+        }
+        rect.cluster {
+            fill: none;
+            stroke: coral;
+            stroke-width: 1px;
+        }
+        circle.entrance {
+            fill: coral;
+        }
+        </style>
+    </head>
+    <body>
+
+        <div id="summary">
+            <h3></h3>
+        </div>
+
+        <script type="text/javascript">
+        "use strict";
+
+        window.onload = function() {
+
+            [BreadthFirst, Greedy, HPAStar].forEach(Algo => {
+                let algo = new Algo(20, 20, 0, 0, 19, 19);
+                algo.obstacle(4, 0, 1, 10);
+                algo.obstacle(5, 13, 4, 4);
+                algo.obstacle(12, 8, 4, 2);
+                algo.obstacle(16, 5, 1, 15);
+                algo.execute();
+            });
+        };
+        </script>
+
+    </body>
+</html>
